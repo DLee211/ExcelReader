@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ExcelReader;
@@ -14,11 +15,9 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        // Other service configurations
 
-        IConfiguration configuration = new ConfigurationBuilder()
-            .SetBasePath(AppContext.BaseDirectory)
-            .AddJsonFile("appsettings.json")
-            .Build();
+        services.AddDbContext<ExcelDbContext>(options =>
+            options.UseSqlServer(Environment.GetEnvironmentVariable("DbConnection")));
     }
-
 }

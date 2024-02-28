@@ -1,28 +1,34 @@
 ﻿using ExcelReader;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-var host = CreateHostBuilder(args).Build();
 
+var host = CreateHostBuilder(args).Build();
 using (var scope = host.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    try
+
+    using (var context = services.GetRequiredService<ExcelDbContext>())
     {
-        var context = services.GetRequiredService<ExcelDbContext>();
-        context.Database.EnsureDeleted(); // Ensure that the database is deleted
-        context.Database.EnsureCreated(); // Ensure that the database is created based on the current model
+        if (context.Database.CanConnect())
+        {
+            context.Database.EnsureDeleted();
+        }
+
+        context.Database.EnsureCreated();
+        Console.WriteLine("Database created");
     }
-    catch (Exception ex)
-    {
-        Console.WriteLine("An error occurred while creating the database.");
-        Console.WriteLine(ex.Message);
-    }
+
+    host.Run();
 }
+
 
 static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
+        .ConfigureAppConfiguration((hostingContext, config) =>
         {
-            webBuilder.UseStartup<Startup>();
-        });
+            config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+        })
+        .ConfigureServices((_, services) =>
+            services.AddDbContext<ExcelDbContext>());

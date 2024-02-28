@@ -6,7 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
-    </PropertyGroup>
+      <UserSecretsId>65f68b85-c7cc-422a-8cc9-f7f313b5505f</UserSecretsId>
+  </PropertyGroup>
 
     <ItemGroup>
       <Content Include="..\.dockerignore">
@@ -20,12 +21,16 @@
       <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0-preview.1.24080.9" />
       <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.0-preview.1.24080.9" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0-preview.1.24080.9" />
-      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.0-preview.1.24080.9" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0-preview.1.24080.9" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Model\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="bin\Debug\net8.0\appsettings.json" />
     </ItemGroup>
 
 </Project>
