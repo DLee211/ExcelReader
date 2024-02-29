@@ -31,5 +31,43 @@ namespace ExcelReader
             // Add ExcelDbContext to the DI container
             services.AddDbContext<ExcelDbContext>(options => options.UseSqlServer(connectionString));
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ExcelData>()
+                .HasNoKey();
+            
+            modelBuilder.Entity<ExcelData>()
+                .Property(e => e.COGS)
+                .HasPrecision(20, 5);
+
+            modelBuilder.Entity<ExcelData>()
+                .Property(e => e.Discounts)
+                .HasPrecision(20, 5);
+
+            modelBuilder.Entity<ExcelData>()
+                .Property(e => e.GrossSales)
+                .HasPrecision(20, 5);
+
+            modelBuilder.Entity<ExcelData>()
+                .Property(e => e.Manufacturing)
+                .HasPrecision(20, 5);
+
+            modelBuilder.Entity<ExcelData>()
+                .Property(e => e.Profit)
+                .HasPrecision(20, 5);
+
+            modelBuilder.Entity<ExcelData>()
+                .Property(e => e.SalePrice)
+                .HasPrecision(20, 5);
+
+            modelBuilder.Entity<ExcelData>()
+                .Property(e => e.Sales)
+                .HasPrecision(20, 5);
+
+            modelBuilder.Entity<ExcelData>()
+                .Property(e => e.UnitsSold)
+                .HasPrecision(20, 5);
+        }
+        
     }
 }

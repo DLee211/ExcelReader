@@ -3,6 +3,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+string filePath = "C:\\Users\\dnll4\\RiderProjects\\ExcelReader\\ExcelReader\\Financial Sample.xlsx";
+
+ExcelReaderEngine.ReadExcelData(filePath);
+ExcelReaderEngine.SetExcelData(filePath);
 
 var host = CreateHostBuilder(args).Build();
 using (var scope = host.Services.CreateScope())
