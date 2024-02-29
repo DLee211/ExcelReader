@@ -26,10 +26,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Model\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Include="bin\Debug\net8.0\appsettings.json" />
     </ItemGroup>
 
