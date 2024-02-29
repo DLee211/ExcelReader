@@ -2,7 +2,6 @@
 
 public class ExcelData
 {
-    public int Id { get; set; }
     public string Segment { get; set; }
     public string Country { get; set; }
     public string Product { get; set; }
