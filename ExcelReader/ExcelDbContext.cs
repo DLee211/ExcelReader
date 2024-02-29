@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ExcelReader.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -7,7 +8,9 @@ namespace ExcelReader
     public class ExcelDbContext : DbContext
     {
         private readonly IConfiguration _configuration;
-
+        
+        public DbSet<ExcelData> ExcelData { get; set; }
+        
         public ExcelDbContext(DbContextOptions<ExcelDbContext> options, IConfiguration configuration)
             : base(options)
         {
