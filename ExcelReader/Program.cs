@@ -19,14 +19,11 @@ using (var scope = host.Services.CreateScope())
         {
             context.Database.EnsureDeleted();
         }
-
         context.Database.EnsureCreated();
         Console.WriteLine("Database created");
     }
-
     host.Run();
 }
-
 
 static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
