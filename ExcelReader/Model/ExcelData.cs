@@ -1,7 +1,11 @@
-﻿namespace ExcelReader.Model;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ExcelReader.Model;
 
 public class ExcelData
-{
+{ 
+    [Key]
+    public int Id { get; set; }
     public string Segment { get; set; }
     public string Country { get; set; }
     public string Product { get; set; }

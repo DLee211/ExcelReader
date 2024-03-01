@@ -1,29 +1,11 @@
 ﻿using ExcelReader.Model;
+using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 
 namespace ExcelReader;
 
 public class ExcelReaderEngine
 {
-    public static void ReadExcelData(string filePath)
-    {
-        using (var package = new ExcelPackage(new FileInfo(filePath)))
-        {
-            var worksheet = package.Workbook.Worksheets[0];
-
-            int rowCount = worksheet.Dimension.Rows;
-            int colCount = worksheet.Dimension.Columns;
-
-            for (int row = 1; row <= rowCount; row++)
-            {
-                for (int col = 1; col <= colCount; col++)
-                {
-                    Console.WriteLine(worksheet.Cells[row, col].Value);
-                }
-            }
-        }
-    }
-
     public static List<ExcelData> SetExcelData(string filePath)
     {
         var dataList = new List<ExcelData>();
@@ -33,7 +15,6 @@ public class ExcelReaderEngine
             var worksheet = package.Workbook.Worksheets[0];
 
             int rowCount = worksheet.Dimension.Rows;
-            int colCount = worksheet.Dimension.Columns;
 
             for (int row = 2; row <= rowCount; row++)
             {
@@ -59,12 +40,20 @@ public class ExcelReaderEngine
                 dataList.Add(data);
             }
         }
-        
-        foreach (var data in dataList)
-        {
-            Console.WriteLine($"Segment: {data.Segment}, Country: {data.Country}, Product: {data.Product}, DiscountBand: {data.DiscountBand}, UnitsSold: {data.UnitsSold}, Manufacturing: {data.Manufacturing}, SalePrice: {data.SalePrice}, GrossSales: {data.GrossSales}, Discounts: {data.Discounts}, Sales: {data.Sales}, COGS: {data.COGS}, Profit: {data.Profit}, Date: {data.Date}, MonthNumber: {data.MonthNumber}, MonthName: {data.MonthName}, Year: {data.Year}");
-        }
-        
+        Console.WriteLine("Data read from Excel.");
         return dataList;
+    }
+    
+    public static void WriteToDatabase(List<ExcelData> dataList)
+    {
+        string connectionString = Environment.GetEnvironmentVariable("DbConnection");
+        var optionsBuilder = new DbContextOptionsBuilder<ExcelDbContext>();
+        optionsBuilder.UseSqlServer(connectionString);
+        using (var context = new ExcelDbContext(optionsBuilder.Options))
+        {
+            context.AddRange(dataList);
+            context.SaveChanges();
+            Console.WriteLine("Data written to database.");
+        }
     }
 }
