@@ -1,6 +1,6 @@
 # ExcelReader
 
-ExcelReader is a C# project that reads data from an Excel file and writes it to a SQL Server database using Entity Framework Core.
+This project, named "ExcelReader", is a C# application that reads data from an Excel file and writes it to a SQL Server database using Entity Framework Core. The data read from the Excel file is structured according to a specific model, ExcelData, which includes various properties such as Segment, Country, Product, DiscountBand, UnitsSold, Manufacturing, SalePrice, GrossSales, Discounts, Sales, COGS, Profit, Date, MonthNumber, MonthName, and Year.  The application uses the EPPlus library to read the Excel file. The data is then mapped to the ExcelData model and added to a list. This list of data is then written to a SQL Server database using Entity Framework Core.  The application is configured using a host builder, which sets up the app configuration and services. The database context, ExcelDbContext, is registered as a service and used to interact with the database.
 
 ## Getting Started
 
