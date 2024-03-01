@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-string filePath = "C:\\Users\\dnll4\\RiderProjects\\ExcelReader\\ExcelReader\\Financial Sample.xlsx";
+string filePath = ""; //Put Financial Sample.xlsx file path here
 
 
 var host = CreateHostBuilder(args).Build();
@@ -27,8 +27,6 @@ using (var scope = host.Services.CreateScope())
     }
     host.Run();
 }
-
-
 
 static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
