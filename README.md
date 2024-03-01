@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-- .NET 5.0 or later
+- .NET 8.0
 - SQL Server
 
 ### Installing
@@ -27,7 +27,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Built With
 
 - **C#**: The main programming language used.
-- **.NET 5.0**: The framework used.
+- **.NET 8.0**: The framework used.
 - **Entity Framework Core**: The Object-Relational Mapping (ORM) framework used.
 - **SQL Server**: The database system used.
 - **EPPlus**: A .NET library to read and write Excel 2007/2010 files using the Open Office Xml format (xlsx).
