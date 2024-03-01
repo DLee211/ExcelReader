@@ -7,14 +7,12 @@ namespace ExcelReader
 {
     public class ExcelDbContext : DbContext
     {
-        private readonly IConfiguration _configuration;
         
         public DbSet<ExcelData> ExcelData { get; set; }
         
-        public ExcelDbContext(DbContextOptions<ExcelDbContext> options, IConfiguration configuration)
+        public ExcelDbContext(DbContextOptions<ExcelDbContext> options)
             : base(options)
         {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,7 +32,7 @@ namespace ExcelReader
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ExcelData>()
-                .HasNoKey();
+                .HasKey(c => new { c.Segment, c.Country, c.Product, c.Date, c.Profit });
             
             modelBuilder.Entity<ExcelData>()
                 .Property(e => e.COGS)
